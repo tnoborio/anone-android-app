@@ -3,6 +3,7 @@ package com.halake.anone;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -198,12 +200,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getItemViewType(int position) {
-            return messages.get(position).type.ordinal();
+            switch (messages.get(position).type) {
+                case Audio:
+                    return 0;
+                case Stamp:
+                    return 1;
+            }
+            return -1;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return Message.Type.values().length;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Message message = (Message)getItem(position);
+            final Message message = (Message)getItem(position);
 
             View row = convertView;
             if (row == null) {
@@ -243,6 +256,24 @@ public class MainActivity extends AppCompatActivity {
                 TextView createdAtView = (TextView) row.findViewById(R.id.created_at);
                 createdAtView.setText(dateFormatter.format(message.createdAt));
             }
+
+            if (row.findViewById(R.id.play) != null) {
+                row.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MediaPlayer player = new MediaPlayer();
+                        try {
+                            player.setDataSource(message.url);
+                            player.prepare();
+                            player.start();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+
             return row;
         }
 

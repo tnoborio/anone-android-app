@@ -9,8 +9,11 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+
+import java.io.InputStream;
 
 public class ViewUtils {
     public static void roundedImage(Context context, ImageView view, int id) {
