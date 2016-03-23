@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Message {
     public enum Type {
-        Audio("audio"), Stamp("audio");
+        Audio("audio"), Stamp("stamp");
 
         private final String jsonValue;
 
@@ -25,7 +25,7 @@ public class Message {
         public static Type getEnum(String value) {
             for(Type v : values())
                 if(v.jsonValue.equalsIgnoreCase(value)) return v;
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("unknown type: " + value);
         }
     }
 
@@ -71,7 +71,7 @@ public class Message {
 
             return message;
 
-        } catch (JSONException | ParseException e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
 
