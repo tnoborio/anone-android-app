@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (row.findViewById(R.id.stamp) != null) {
-                ImageView imageView = (ImageView) findViewById(R.id.stamp);
+                ImageView imageView = (ImageView) row.findViewById(R.id.stamp);
                 new ViewUtils.ImageDownloader(imageView, message.url).execute();
             }
 

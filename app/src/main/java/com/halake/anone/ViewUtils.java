@@ -45,6 +45,8 @@ public class ViewUtils {
         String url;
 
         public ImageDownloader(ImageView imageView, String url) {
+            if (imageView == null)
+                throw new RuntimeException();
             this.imageView = imageView;
             this.url = url;
         }
