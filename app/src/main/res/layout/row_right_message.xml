@@ -4,17 +4,27 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
-    <ImageView
-        android:layout_width="80dp"
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="80dp"
         android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:paddingBottom="10dp"
+        android:textSize="20dp"
+        android:text="12:12"
+        android:id="@+id/created_at"
+        android:textColor="#404040"/>
     <ImageView
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:id="@+id/stamp"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="320dp"
         android:scaleType="fitEnd"
-        android:gravity="right|center_vertical"
-        android:layout_height="160dp" />
+        android:gravity="center"
+        android:layout_height="320dp" />
 </LinearLayout>

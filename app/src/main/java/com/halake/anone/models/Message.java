@@ -69,6 +69,9 @@ public class Message {
             message.url = jsonObject.getString("url");
             message.createdAt = dateFormatter.parse(jsonObject.getString("created_at"));
 
+            if (message.url == null || message.url.equals("null"))
+                return null;
+
             return message;
 
         } catch (Throwable e) {

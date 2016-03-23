@@ -9,6 +9,12 @@
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:id="@+id/face"/>
+    <ImageView
+        android:src="@drawable/ic_play_arrow_black_48dp"
+        android:layout_width="80dp"
+        android:layout_gravity="center"
+        android:layout_height="80dp"
+        android:id="@+id/play"/>
     <TextView
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -19,10 +25,14 @@
         android:gravity="left|center_vertical"
         android:text="hoge"
         android:layout_height="match_parent" />
-    <ImageView
-        android:src="@drawable/ic_play_arrow_black_48dp"
-        android:layout_width="80dp"
-        android:layout_gravity="center"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:id="@+id/play"/>
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:paddingBottom="10dp"
+        android:textSize="20dp"
+        android:id="@+id/created_at"
+        android:text="12:12"
+        android:textColor="#404040"/>
 </LinearLayout>

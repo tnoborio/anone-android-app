@@ -24,8 +24,11 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.halake.anone.models.Message;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
@@ -236,6 +239,10 @@ public class MainActivity extends AppCompatActivity {
                 new ViewUtils.ImageDownloader(imageView, message.url).execute();
             }
 
+            if (row.findViewById(R.id.created_at) != null && message.createdAt != null) {
+                TextView createdAtView = (TextView) row.findViewById(R.id.created_at);
+                createdAtView.setText(dateFormatter.format(message.createdAt));
+            }
             return row;
         }
 
@@ -243,5 +250,10 @@ public class MainActivity extends AppCompatActivity {
             this.messages = messages;
             notifyDataSetChanged();
         }
+    }
+
+    private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd HH:mm");
+    static {
+        dateFormatter.setTimeZone(TimeZone.getDefault());
     }
 }
