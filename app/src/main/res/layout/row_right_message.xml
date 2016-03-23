@@ -7,15 +7,14 @@
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:id="@+id/face"/>
+        android:layout_gravity="center"/>
     <ImageView
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:id="@+id/stamp"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:scaleType="centerCrop"
+        android:scaleType="fitEnd"
         android:gravity="right|center_vertical"
-        android:layout_height="match_parent" />
+        android:layout_height="160dp" />
 </LinearLayout>
