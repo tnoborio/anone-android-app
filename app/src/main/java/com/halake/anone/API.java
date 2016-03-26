@@ -54,9 +54,14 @@ public class API {
     public static void fetchMessages(final FetchMessages.Listener listener) {
         requestQueue.add(new FetchMessages(new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONArray result) {
-                listener.onSuccess(Message.json2List(result));
-                Log.d("", result.toString());
+            public void onResponse(final JSONArray result) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onSuccess(Message.json2List(result));
+                        Log.d("", result.toString());
+                    }
+                }).start();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -78,7 +83,7 @@ public class API {
         }
 
         public PostStamp(final Listener listener, String to, final Bitmap stampBitmap) {
-            super(Method.POST, BASE_URL + "/papa/stamps", request(to), new Response.Listener<JSONObject>() {
+            super(Method.POST, BASE_URL + "/papa/stamps/to/" + to, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject obj) {
                     String path;

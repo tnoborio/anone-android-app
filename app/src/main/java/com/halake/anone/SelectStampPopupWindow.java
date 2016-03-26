@@ -22,7 +22,7 @@ public class SelectStampPopupWindow extends PopupWindow implements AdapterView.O
     private final Listener listener;
     private Activity activity;
 
-    public SelectStampPopupWindow(Activity activity, ArrayList<String> bitmaps, Listener listener) {
+    public SelectStampPopupWindow(Activity activity, ArrayList<Bitmap> bitmaps, Listener listener) {
         super(activity);
 
         this.activity = activity;
@@ -59,9 +59,9 @@ public class SelectStampPopupWindow extends PopupWindow implements AdapterView.O
     }
 
     private class ListAdapter extends BaseAdapter {
-        private List<String> bitmaps;
+        private List<Bitmap> bitmaps;
 
-        public ListAdapter(ArrayList<String> bitmaps) {
+        public ListAdapter(ArrayList<Bitmap> bitmaps) {
             super();
             this.bitmaps = bitmaps;
         }
@@ -83,7 +83,7 @@ public class SelectStampPopupWindow extends PopupWindow implements AdapterView.O
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            String url = (String)getItem(position);
+            Bitmap bitmap = (Bitmap)getItem(position);
 
             View row = convertView;
             if (row == null) {
@@ -92,7 +92,7 @@ public class SelectStampPopupWindow extends PopupWindow implements AdapterView.O
             }
 
             final ImageView view = (ImageView) row.findViewById(R.id.image);
-            new ViewUtils.ImageDownloader(view, url).execute();
+            view.setImageBitmap(bitmap);
 
             return row;
         }

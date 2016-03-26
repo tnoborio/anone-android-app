@@ -1,18 +1,21 @@
 package com.halake.anone.models;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Message {
+    public Bitmap bitmap;
+
     public enum Type {
         Audio("audio"), Stamp("stamp");
 
@@ -66,7 +69,12 @@ public class Message {
             message.to = jsonObject.getString("to");
             message.type =  Type.getEnum(jsonObject.getString("type"));
             message.message = jsonObject.getString("message");
+
             message.url = jsonObject.getString("url");
+            if (message.url != null) {
+                message.bitmap = BitmapFactory.decodeStream(new java.net.URL(message.url).openStream());
+            }
+
             message.createdAt = dateFormatter.parse(jsonObject.getString("created_at"));
 
             if (message.url == null || message.url.equals("null"))

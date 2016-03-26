@@ -3,6 +3,7 @@ package com.halake.anone;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,11 +50,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<String> bitmaps = new ArrayList<>();
-                bitmaps.add("http://nyampass.com/stamp1.png");
-                bitmaps.add("http://nyampass.com/stamp2.png");
-                bitmaps.add("http://nyampass.com/stamp1.png");
-                bitmaps.add("http://nyampass.com/stamp2.png");
+                ArrayList<Bitmap> bitmaps = new ArrayList<>();
+
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_thanks));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_heart));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_ok));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_ng));
+
                 new SelectStampPopupWindow(MainActivity.this, bitmaps, new SelectStampPopupWindow.Listener() {
                     @Override
                     public void onSelectStamp(Bitmap bitmap) {
@@ -249,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (row.findViewById(R.id.stamp) != null) {
                 ImageView imageView = (ImageView) row.findViewById(R.id.stamp);
-                new ViewUtils.ImageDownloader(imageView, message.url).execute();
+                imageView.setImageBitmap(message.bitmap);
             }
 
             if (row.findViewById(R.id.created_at) != null && message.createdAt != null) {
